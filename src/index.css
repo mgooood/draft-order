@@ -1,63 +1,65 @@
 @import "tailwindcss";
 
-/* Custom CSS variables for our fantasy theme */
-:root {
-  --fantasy-purple: #6366f1;
-  --fantasy-gold: #f59e0b;
-  --fantasy-dark: #1e1b4b;
-  --football-green: #16a34a;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+/* Tailwind v4 theme using @layer directive */
+@layer {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    /* Brand colors - fantasy football theme */
+    --color-primary: oklch(0.5614 0.24 283.43); /* Purple: #6366f1 */
+    --color-secondary: oklch(0.7478 0.199 74.8); /* Gold: #f59e0b */
+    --color-accent: oklch(0.5169 0.186 142.5); /* Football green: #16a34a */
+    --color-dark: oklch(0.2205 0.221 292.01); /* Dark purple: #1e1b4b */
+    
+    /* Background colors */
+    --color-bg-primary: oklch(0.1568 0.031 255.09); /* Dark slate: #0f172a (slate-900) */
+    --color-bg-secondary: oklch(0.2354 0.031 255.74); /* Medium slate: #1e293b (slate-800) */
+    --color-bg-tertiary: oklch(0.3162 0.03 257.1); /* Light slate: #334155 (slate-700) */
+    
+    /* Text colors */
+    --color-text-primary: oklch(1 0 0); /* White: #ffffff */
+    --color-text-secondary: oklch(0.8147 0.024 257.1); /* Light gray: #cbd5e1 (slate-300) */
+    --color-text-muted: oklch(0.6549 0.019 257.26); /* Muted gray: #94a3b8 (slate-400) */
+    --color-text-error: oklch(0.5866 0.243 24.02); /* Error red: #dc2626 */
+    
+    /* Border colors */
+    --color-border: oklch(0.3975 0.027 257.06); /* Border color: #475569 (slate-600) */
+    
+    /* State colors */
+    --color-success: oklch(0.5169 0.186 142.5); /* Green: #16a34a */
+    --color-success-muted: oklch(0.488 0.158 142.5); /* Muted green: #15803d */
+    --color-warning: oklch(0.7478 0.199 74.8); /* Gold: #f59e0b */
+    --color-danger: oklch(0.5866 0.243 24.02); /* Red: #dc2626 */
+    --color-danger-muted: oklch(0.3878 0.187 24.02); /* Muted red: #991b1b */
+    
+    /* UI component colors */
+    --color-available: var(--color-success-muted);
+    --color-available-hover: var(--color-success);
+    --color-taken: var(--color-danger-muted);
+    --color-bg-highlight: var(--color-primary);
   }
 }
+
+/* Theme utility classes */
+.bg-theme-primary { background-color: var(--color-primary); }
+.bg-theme-secondary { background-color: var(--color-secondary); }
+.bg-theme-accent { background-color: var(--color-accent); }
+.bg-theme-dark { background-color: var(--color-dark); }
+
+.bg-theme-bg-primary { background-color: var(--color-bg-primary); }
+.bg-theme-bg-secondary { background-color: var(--color-bg-secondary); }
+.bg-theme-bg-tertiary { background-color: var(--color-bg-tertiary); }
+
+.text-theme-primary { color: var(--color-primary); }
+.text-theme-secondary { color: var(--color-secondary); }
+.text-theme-accent { color: var(--color-accent); }
+.text-theme-text-primary { color: var(--color-text-primary); }
+.text-theme-text-secondary { color: var(--color-text-secondary); }
+.text-theme-text-muted { color: var(--color-text-muted); }
+.text-theme-text-error { color: var(--color-text-error); }
+
+.border-theme-border { border-color: var(--color-border); }
+
+/* UI Element specific colors */
+.bg-available { background-color: var(--color-available); }
+.hover\:bg-available-hover:hover { background-color: var(--color-available-hover); }
+.bg-taken { background-color: var(--color-taken); }
+

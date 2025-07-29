@@ -1,25 +1,35 @@
-import { useState } from 'react'
-import './App.css'
+import { Route, Routes, HashRouter } from 'react-router-dom';
 
+// Page imports
+import HomePage from './pages/HomePage';
+import LeagueSelectionPage from './pages/LeagueSelectionPage';
+import ResultsPage from './pages/ResultsPage';
+import AdminCreatePage from './pages/AdminCreatePage';
+
+/**
+ * Main App component with React Router configuration
+ * Defines all routes for the DraftOrder application
+ */
 function App() {
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
-      <header className="p-6">
-        <h1 className="text-3xl font-bold text-center text-purple-400">
-          DraftOrder
-        </h1>
-        <p className="text-center text-slate-300 mt-2">
-          Fantasy Football Draft Position Selection
-        </p>
-      </header>
-      
-      <main className="container mx-auto px-4">
-        {/* App content will go here */}
-        <div className="text-center py-12">
-          <p className="text-slate-400">Ready to build something awesome!</p>
-        </div>
-      </main>
-    </div>
+    <HashRouter>
+      <Routes>
+        {/* Home page - entry point */}
+        <Route path="/" element={<HomePage />} />
+        
+        {/* League selection page - where coaches select their positions */}
+        <Route path="/league/:id" element={<LeagueSelectionPage />} />
+        
+        {/* Results page - shows final draft order */}
+        <Route path="/results/:id" element={<ResultsPage />} />
+        
+        {/* Admin page - for league creation */}
+        <Route path="/admin/create" element={<AdminCreatePage />} />
+        
+        {/* Fallback - redirect to home */}
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </HashRouter>
   );
 }
 

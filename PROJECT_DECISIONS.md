@@ -101,3 +101,61 @@ Web application to replace chaotic email threads for fantasy football draft posi
 
 **Portfolio Value**: Shows ability to balance immediate needs with future scalability
 
+## Implementation Decisions
+
+### Draft Order Logic
+
+**CHOSEN**: Custom draft order based on previous year's results
+
+**Logic**:
+- 4th place from last year picks first
+- 5th, 6th, etc. pick next in ascending rank order
+- 3rd place picks third-to-last
+- 2nd place picks second-to-last
+- 1st place picks last
+- New coaches (rank 0) pick after all ranked coaches
+
+**Implementation**:
+- Custom sorting algorithm in SelectionOrderList component
+- Special handling for top 3 finishers with reversed ordering
+- Ability for commissioner to mark new coaches with rank 0
+
+### Backend Integration Approach
+
+**CHOSEN**: Service layer abstraction for seamless backend integration
+
+**Current Mock Implementation**:
+- Service functions that mimic API calls
+- Isolated data operations from UI components
+- Proper async handling to simulate real API behavior
+
+**Example**:
+```typescript
+// Service function
+async function updateCoachSelection(leagueId, coachId, position) {
+  // Simulate network delay
+  await new Promise(resolve => setTimeout(resolve, 300));
+  
+  // Update data and return result
+  // ...
+}
+
+// Component usage
+const handleSelectPosition = async (position) => {
+  try {
+    const updatedLeague = await updateCoachSelection(
+      league.id, coachId, position
+    );
+    // Handle success
+  } catch (error) {
+    // Handle error
+  }
+};
+```
+
+**Future Backend Integration**:
+- Replace mock service functions with actual API calls
+- Maintain the same function signatures
+- Add proper authentication and error handling
+- Use React state management instead of page refreshes
+
